@@ -1,7 +1,9 @@
 package com.shopbas.domain;
 
-import java.sql.Date;
+import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.sql.Date;
+@Document
 public class Throttle {
     private String id;
     private String deviceId ;
