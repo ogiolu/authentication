@@ -12,7 +12,10 @@ public class JwtUserDatails implements UserDetails {
     private Long id;
     private  Collection<?extends GrantedAuthority> authorities;
     public JwtUserDatails(String userName, Long id, String token, List<GrantedAuthority> grantedAuthorities) {
-
+      this.userName=userName;
+      this.id=id;
+      this.token=token;
+      this.authorities=grantedAuthorities;
     }
 
     @Override
@@ -27,22 +30,22 @@ public class JwtUserDatails implements UserDetails {
 
     @Override
     public String getUsername() {
-        return null;
+        return userName;
     }
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override

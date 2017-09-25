@@ -4,6 +4,7 @@ import com.shopbas.authentication.security.JwtAuthenticationEntryPoint;
 import com.shopbas.authentication.security.JwtAuthenticationTokenFilter;
 import com.shopbas.authentication.security.JwtAuthenticationProvider;
 import com.shopbas.authentication.security.JwtSuccessHandler;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -21,8 +22,9 @@ import java.util.Collections;
 @EnableWebSecurity
 @Configuration
 public class JwtSecurityConfig extends WebSecurityConfigurerAdapter{
-
+    @Autowired
     private JwtAuthenticationProvider authenticationProvider;
+    @Autowired
     private JwtAuthenticationEntryPoint entryPoint;
 
     @Bean
@@ -33,7 +35,8 @@ public class JwtSecurityConfig extends WebSecurityConfigurerAdapter{
 
     @Bean
     public JwtAuthenticationTokenFilter authenticationTokenFilter(){
-        JwtAuthenticationTokenFilter filter = new JwtAuthenticationTokenFilter();
+        JwtAuthenticationTokenFilter filter;
+        filter = new JwtAuthenticationTokenFilter();
         filter.setAuthenticationManager(authenticationManager());
         filter.setAuthenticationSuccessHandler(new JwtSuccessHandler());
         return filter;
