@@ -7,6 +7,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
 
+
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -20,13 +21,14 @@ public class JwtAuthenticationTokenFilter extends AbstractAuthenticationProcessi
     private JwtSuccessHandler authenticationSuccessHandler;
 
      public JwtAuthenticationTokenFilter(){
-         super("**/rest/**");
+         super("/**");
      }
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws AuthenticationException, IOException, ServletException {
         String header =httpServletRequest.getHeader("Authorization");
-        if (header== null && !header.startsWith("Token")){
+       // if (header== null && !header.startsWith("Token")){
+        if (header== null ){
             throw new RuntimeException("JWT Token Missing");
         }
         String authenticationToken=header.substring(6);
