@@ -21,7 +21,7 @@ public class JwtAuthenticationTokenFilter extends AbstractAuthenticationProcessi
     private JwtSuccessHandler authenticationSuccessHandler;
 
      public JwtAuthenticationTokenFilter(){
-         super("/**");
+         super("/rest/**");
      }
 
     @Override

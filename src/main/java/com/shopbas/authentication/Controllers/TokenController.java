@@ -10,13 +10,8 @@ import org.springframework.web.bind.annotation.*;
 public class TokenController {
     @Autowired
     private JwtTokenGenerator jwtTokenGenerate;
-    //private TokenController jwtTokenGenerate;
-/*
-    public TokenController(TokenController jwtTokenGenerate) {
-        this.jwtTokenGenerate = jwtTokenGenerate;
-    }
-*/
-    @PostMapping
+    
+    @PostMapping("/generate")
     public String generate(@RequestBody JwtUser jwtUser){
        return  jwtTokenGenerate.generate(jwtUser);
 
