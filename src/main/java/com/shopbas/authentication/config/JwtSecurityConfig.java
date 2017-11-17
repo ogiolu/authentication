@@ -11,6 +11,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -43,9 +44,10 @@ public class JwtSecurityConfig extends WebSecurityConfigurerAdapter{
     }
 
     @Override
-    protected void configure(HttpSecurity http) throws Exception {
+    protected void configure(HttpSecurity http ) throws Exception {
 
-        http.csrf().disable().authorizeRequests().antMatchers("**/rest/**").authenticated()
+        http.csrf().ignoringAntMatchers("**/token/**").disable().authorizeRequests()
+                .antMatchers("**/rest/**").authenticated()
                               .and()
                               .exceptionHandling().authenticationEntryPoint(entryPoint)
                               .and()
@@ -54,4 +56,11 @@ public class JwtSecurityConfig extends WebSecurityConfigurerAdapter{
         http.headers().cacheControl();
 
     }
+
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring().antMatchers("**/token/**");
+    }
+
+
 }
