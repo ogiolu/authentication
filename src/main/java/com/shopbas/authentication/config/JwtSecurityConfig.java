@@ -46,7 +46,7 @@ public class JwtSecurityConfig extends WebSecurityConfigurerAdapter{
     @Override
     protected void configure(HttpSecurity http ) throws Exception {
 
-        http.csrf().ignoringAntMatchers("**/token/**").disable().authorizeRequests()
+        http.csrf().disable().authorizeRequests()
                 .antMatchers("**/rest/**").authenticated()
                               .and()
                               .exceptionHandling().authenticationEntryPoint(entryPoint)
@@ -57,10 +57,7 @@ public class JwtSecurityConfig extends WebSecurityConfigurerAdapter{
 
     }
 
-    @Override
-    public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("**/token/**");
-    }
+
 
 
 }

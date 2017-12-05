@@ -33,7 +33,8 @@ public class JwtAuthenticationTokenFilter extends AbstractAuthenticationProcessi
         if (header== null ){
             throw new RuntimeException("JWT Token Missing");
         }
-        String authenticationToken=header.substring(6);
+        //String authenticationToken=header.substring(6);
+        String authenticationToken=header;
         JwtAuthenticationToken token =new JwtAuthenticationToken(authenticationToken);
         return getAuthenticationManager().authenticate(token);
     }
@@ -41,6 +42,7 @@ public class JwtAuthenticationTokenFilter extends AbstractAuthenticationProcessi
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
         super.successfulAuthentication(request, response, chain, authResult);
+        System.out.println("Authentication Successful >>>>>>>>>>>>>>>>>>>>>>>>.");
         chain.doFilter(request,response);
     }
 }
